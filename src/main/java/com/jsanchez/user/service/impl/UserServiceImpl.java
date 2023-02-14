@@ -1,5 +1,6 @@
 package com.jsanchez.user.service.impl;
 
+import com.jsanchez.user.exception.ConflictApiException;
 import com.jsanchez.user.mapper.UserRequestDtoMapper;
 import com.jsanchez.user.mapper.UserResponseDtoMapper;
 import com.jsanchez.user.model.entity.User;
@@ -7,6 +8,7 @@ import com.jsanchez.user.model.request.UserRequestDto;
 import com.jsanchez.user.model.response.UserResponseDto;
 import com.jsanchez.user.repository.UserRepository;
 import com.jsanchez.user.service.UserService;
+import com.jsanchez.user.util.MessageConstant;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -30,6 +32,8 @@ public class UserServiceImpl implements UserService {
 
     public UserResponseDto create(UserRequestDto userRequestDto) {
 
+        this.checkRequest(userRequestDto);
+
         User user = this.userRequestDtoMapper.dtoToEntity(userRequestDto);
 
         user.setDefaultInitialData(new Date());
@@ -42,5 +46,12 @@ public class UserServiceImpl implements UserService {
         return this.userResponseDtoMapper.entityToDto(
                 this.userRepository.save(user)
         );
+    }
+
+    private void checkRequest(UserRequestDto userRequestDto) {
+
+        if (this.userRepository.existsByEmail(userRequestDto.getEmail())) {
+            throw new ConflictApiException(MessageConstant.EMAIL_ALREADY_REGISTERED);
+        }
     }
 }
