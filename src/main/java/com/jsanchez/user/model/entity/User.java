@@ -48,4 +48,12 @@ public class User implements Serializable {
 
     @Column(name = "is_active",nullable = false)
     private Boolean isActive;
+
+
+    public void setDefaultInitialData(Date date) {
+        this.isActive = true;
+        this.created = date;
+        this.modified = date;
+        this.lastLogin = date;
+    }
 }
