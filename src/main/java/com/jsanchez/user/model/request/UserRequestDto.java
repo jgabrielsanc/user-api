@@ -16,15 +16,10 @@ public class UserRequestDto {
 
     private String name;
 
+    private String email;
+
     private String password;
 
     private List<PhoneRequestDto> phones;
 
-    private Date created;
-
-    private Date modified;
-
-    private Date lastLogin;
-
-    private Boolean isActive;
 }
