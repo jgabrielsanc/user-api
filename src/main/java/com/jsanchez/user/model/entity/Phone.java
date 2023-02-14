@@ -29,8 +29,8 @@ public class Phone implements Serializable {
     @Column(name = "city_code",nullable = false)
     private String cityCode;
 
-    @Column(name = "contry_code",nullable = false)
-    private String contryCode;
+    @Column(name = "country_code",nullable = false)
+    private String countryCode;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_user", nullable = false)
