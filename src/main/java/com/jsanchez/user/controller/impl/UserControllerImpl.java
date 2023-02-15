@@ -4,6 +4,7 @@ import com.jsanchez.user.controller.UserController;
 import com.jsanchez.user.model.request.UserRequestDto;
 import com.jsanchez.user.model.response.UserResponseDto;
 import com.jsanchez.user.service.UserService;
+import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+@Api(tags = "User")
 @RestController
 @RequestMapping(
         value = "/users",
