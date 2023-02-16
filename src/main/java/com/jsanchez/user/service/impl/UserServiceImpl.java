@@ -9,8 +9,7 @@ import com.jsanchez.user.model.response.UserResponseDto;
 import com.jsanchez.user.repository.UserRepository;
 import com.jsanchez.user.security.jwt.JwtUtils;
 import com.jsanchez.user.service.UserService;
-import com.jsanchez.user.util.MessageConstant;
-import org.springframework.security.authentication.AuthenticationManager;
+import com.jsanchez.user.util.Constants;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +24,6 @@ public class UserServiceImpl implements UserService {
 
     private final UserResponseDtoMapper userResponseDtoMapper;
 
-    private final AuthenticationManager authenticationManager;
-
     private final JwtUtils jwtUtils;
 
     private final PasswordEncoder encoder;
@@ -34,13 +31,11 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserRepository userRepository,
                            UserRequestDtoMapper userRequestDtoMapper,
                            UserResponseDtoMapper userResponseDtoMapper,
-                           AuthenticationManager authenticationManager,
                            JwtUtils jwtUtils,
                            PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.userRequestDtoMapper = userRequestDtoMapper;
         this.userResponseDtoMapper = userResponseDtoMapper;
-        this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
         this.encoder = encoder;
     }
@@ -68,7 +63,7 @@ public class UserServiceImpl implements UserService {
     private void checkRequest(UserRequestDto userRequestDto) {
 
         if (this.userRepository.existsByEmail(userRequestDto.getEmail())) {
-            throw new ConflictApiException(MessageConstant.EMAIL_ALREADY_REGISTERED);
+            throw new ConflictApiException(Constants.EMAIL_ALREADY_REGISTERED);
         }
     }
 }

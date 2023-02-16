@@ -1,5 +1,6 @@
 package com.jsanchez.user.validation;
 
+import com.jsanchez.user.util.Constants;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.validation.ConstraintValidator;
@@ -16,6 +17,10 @@ public class ValidPasswordValidator implements ConstraintValidator<ValidPassword
 
         if (value == null ) {
             return false;
+        }
+
+        if (passRegex == null) {
+            passRegex = Constants.PASS_REGEX;
         }
 
         Pattern pattern = Pattern.compile(passRegex);

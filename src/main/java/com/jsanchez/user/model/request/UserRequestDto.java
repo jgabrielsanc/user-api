@@ -1,6 +1,6 @@
 package com.jsanchez.user.model.request;
 
-import com.jsanchez.user.util.MessageConstant;
+import com.jsanchez.user.util.Constants;
 import com.jsanchez.user.validation.ValidPassword;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +10,7 @@ import lombok.Setter;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Getter
@@ -18,16 +19,18 @@ import java.util.List;
 @AllArgsConstructor
 public class UserRequestDto {
 
-    @NotBlank(message = MessageConstant.REQUIRED)
+    @NotBlank(message = Constants.REQUIRED)
+    @Size(max = 55)
     private String name;
 
-    @NotBlank(message = MessageConstant.REQUIRED)
-    @Pattern(regexp = MessageConstant.EMAIL_REGEX,
-            message = MessageConstant.INVALID_EMAIL_FORMAT)
+    @NotBlank(message = Constants.REQUIRED)
+    @Pattern(regexp = Constants.EMAIL_REGEX,
+            message = Constants.INVALID_EMAIL_FORMAT)
+    @Size(max = 55)
     private String email;
 
-    @ValidPassword(message = "muy débil")
-    @NotBlank(message = MessageConstant.REQUIRED)
+    @ValidPassword(message = "muy facil")
+    @NotBlank(message = Constants.REQUIRED)
     private String password;
 
     private List<@Valid PhoneRequestDto> phones;
